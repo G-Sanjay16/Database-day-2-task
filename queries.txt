@@ -1,0 +1,78 @@
+
+CREATE TABLE users (
+    userid INTEGER AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100),
+    useremail VARCHAR(100),
+    batchid INTEGER
+);
+
+INSERT INTO users(username, useremail, batchid) VALUES
+    ("arya", "arya@gmail.com", 50),
+    ("maddy", "maddy@gmail.com", 09),
+    ("shelby", "shelby@gmail.com", 60),
+    ("aruther", "aruther@gmail.com", 51);
+
+CREATE TABLE mentors (
+    mentorid INTEGER AUTO_INCREMENT PRIMARY KEY,
+    mentorname VARCHAR(100),
+    mentoremail VARCHAR(100)
+);
+
+INSERT INTO mentors(mentorname, mentoremail) VALUES
+    ("Yadav", "yadav@gmail.com"),
+    ("annanya", "Annanya@gmail.com"),
+    ("ron", "ron@gmail.com"),
+    ("veny", "venya@gmail.com");
+    
+CREATE TABLE topics (
+    topicid INTEGER AUTO_INCREMENT PRIMARY KEY,
+    topic VARCHAR(200),
+    topic_date DATE,
+    mentorid INTEGER,
+    batchid INTEGER,
+    FOREIGN KEY (mentorid) REFERENCES mentors(mentorid)
+);
+INSERT INTO topics(topic, mentorid, batchid) VALUES
+    ("HTML - Basics", 1, 50),
+    ("NodeJS - Basics", 2, 09),
+    ("JavaScript - Basics", 3, 60),
+    ("React - Basics",4, 51);
+    CREATE TABLE tasks (
+    taskid INTEGER AUTO_INCREMENT PRIMARY KEY,
+    topicid INTEGER,
+    task VARCHAR(1000),
+    batchid INTEGER,
+    FOREIGN KEY (topicid) REFERENCES topics(topicid)
+);
+
+INSERT INTO tasks(topicid, task, batchid) VALUES
+    (1, "HTML Task", 50),
+    (2, "Javascript Task", 09),
+    (3, "React Task", 60),
+    (4, "NodeJs Task", 51);
+CREATE TABLE queries (
+    queryid INTEGER AUTO_INCREMENT PRIMARY KEY,
+    userid INTEGER,
+    querybody VARCHAR(1000),
+    mentorid INTEGER,
+    FOREIGN KEY (userid) REFERENCES users(userid),
+    FOREIGN KEY (mentorid) REFERENCES mentors(mentorid)
+);
+
+INSERT INTO queries(userid, querybody, mentorid) VALUES
+    (1, "query about HTML", 1),
+    (3, "query about Javascript",3),
+    (2, "query about React", 4),
+    (4, "query about DS", 2);
+
+describe users;
+describe mentors;
+describe topics;
+describe tasks;
+describe queries;
+
+
+
+
+
+
